@@ -1,5 +1,7 @@
-package com.br.zup.casacodigo;
+package com.br.zup.casacodigo.autor;
 
+
+import com.br.zup.casacodigo.validation.ValidationEmailValid;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +12,7 @@ public class AutorRequest {
     private String nome;
     @NotBlank @Size(max = 400)
     private String descricao;
+    @ValidationEmailValid
     @NotBlank(message = "Não pode nulo") @Email(message =  "Email tipo invalido")
     private String email;
 

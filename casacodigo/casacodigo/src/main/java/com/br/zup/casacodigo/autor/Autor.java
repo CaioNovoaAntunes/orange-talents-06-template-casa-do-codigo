@@ -1,4 +1,4 @@
-package com.br.zup.casacodigo;
+package com.br.zup.casacodigo.autor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

@@ -1,4 +1,4 @@
-package com.br.zup.casacodigo;
+package com.br.zup.casacodigo.autor;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
