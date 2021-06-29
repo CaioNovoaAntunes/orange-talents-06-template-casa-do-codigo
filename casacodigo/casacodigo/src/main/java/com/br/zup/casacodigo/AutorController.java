@@ -1,10 +1,12 @@
 package com.br.zup.casacodigo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
@@ -20,7 +22,9 @@ public class AutorController {
     }
 
     @PostMapping
-    public Autor salvaAutor(@RequestBody @Valid Autor autor){
-        return autorRepository.save(autor);
+    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorRequest autorRequest , UriComponentsBuilder uriComponentsBuilder){
+        Autor autor = autorRequest.toModel();
+        Autor aSalvo = autorRepository.save(autor);
+        return ResponseEntity.ok().body(new AutorResponse(aSalvo));
     }
 }
