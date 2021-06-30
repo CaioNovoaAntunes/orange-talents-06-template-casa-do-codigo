@@ -1,26 +1,26 @@
 package com.br.zup.casacodigo.categoria;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import com.br.zup.casacodigo.validation.UniqueValue;
+
 
 public class CategoriaDTO {
-    @NotBlank
+
+    @UniqueValue(instanceClass = Categoria.class, field = "nome")
     private String nome;
 
     public CategoriaDTO() {
     }
 
-    public CategoriaDTO(@NotNull @NotEmpty String nome) {
+    public CategoriaDTO(String nome) {
         this.nome = nome;
+    }
+
+    public Categoria converter(){
+        return new Categoria(this.nome);
     }
 
     public String getNome() {
         return nome;
-    }
-
-    public Categoria converter() {
-        return new Categoria(this.nome);
     }
 }
 
