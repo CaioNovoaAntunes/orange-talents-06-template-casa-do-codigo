@@ -20,8 +20,9 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria categoriaCadastrar(@RequestBody @Valid Categoria categoria){
-        return repository.save(categoria);
+    public ResponseEntity<Categoria> categoriaCadastrar(@RequestBody @Valid CategoriaDTO categoriaDTO){
+       Categoria categoria = categoriaDTO.converter();
+        return  ResponseEntity.ok(categoria);
     }
 
 
