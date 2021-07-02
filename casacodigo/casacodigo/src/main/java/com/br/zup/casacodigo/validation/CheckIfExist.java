@@ -1,18 +1,37 @@
 package com.br.zup.casacodigo.validation;
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
-@Documented
-@Constraint(validatedBy = {CheckIfExistsValidator.class})
-@Target({ElementType.FIELD})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD})
+@Retention(RUNTIME)
+@Constraint(validatedBy = CheckIfExistsValidator.class)
 public @interface CheckIfExist {
-    String message() default "Instancia não encontrada";
+
+    String message() default "Objeto não encontrado";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
+
+    String value() default "";
+
     String identityField();
-    Class instanceClass();
+
+    Class<?> instanceClass();
+
 }

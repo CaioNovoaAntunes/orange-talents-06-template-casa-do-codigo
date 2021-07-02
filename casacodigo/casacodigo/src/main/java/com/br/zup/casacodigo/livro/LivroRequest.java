@@ -47,11 +47,14 @@ public class LivroRequest {
 
 
     @Future
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataLancamento;
+
     @JsonProperty
     @CheckIfExist(identityField = "id", instanceClass = Categoria.class)
     private Long categoria;
+
     @JsonProperty
     @CheckIfExist(identityField = "id"  , instanceClass = Autor.class)
     private Long autor;
@@ -76,9 +79,7 @@ public class LivroRequest {
         return new Livro(titulo,sumario,resumo,preco,numeroPaginas,isbn,dataLancamento, c, a );
     }
 
-    public void setDataLancamento(LocalDate dataLancamento) {
-        this.dataLancamento = dataLancamento;
-    }
+
 
     public String getTitulo() {
         return titulo;

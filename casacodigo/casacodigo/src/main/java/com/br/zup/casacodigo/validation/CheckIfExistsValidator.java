@@ -1,33 +1,36 @@
 package com.br.zup.casacodigo.validation;
+
+
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
+import java.util.List;
 public class CheckIfExistsValidator implements ConstraintValidator<CheckIfExist, Object> {
-    private EntityManager em;
 
-    private Class<?> object;
-    private String identityField;
+    private String atributo;
+    private Class<?> classe;
 
-    public CheckIfExistsValidator(EntityManager em) {
-        this.em = em;
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public void initialize(CheckIfExist existeValid) {
+        atributo = existeValid.identityField();
+        classe = existeValid.instanceClass();
     }
 
     @Override
-    public void initialize(CheckIfExist constraintAnnotation) {
-        this.object = constraintAnnotation.instanceClass();
-        this.identityField = constraintAnnotation.identityField();
-        ConstraintValidator.super.initialize(constraintAnnotation);
-    }
+    public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
+        Query query = entityManager.createQuery("select 1 from " + classe.getName() + " where " + atributo + "=:value");
+        query.setParameter("value", obj);
+        List<?> list = query.getResultList();
 
-    @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (value == null){
-            return true;
+        if (list.isEmpty()) {
+            return false;
         }
-        return !this.em.createQuery("select 1 from "+this.object.getName()+" where "+ this.identityField + "=:field")
-                .setParameter("field",value)
-                .getResultList()
-                .isEmpty();
+
+        return true;
     }
 }
