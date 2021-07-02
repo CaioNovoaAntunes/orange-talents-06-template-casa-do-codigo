@@ -1,5 +1,6 @@
 package com.br.zup.casacodigo.livro;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -20,8 +21,8 @@ public class LivroController {
 
 
     @PostMapping
-    public Livro cadastraLivro(@RequestBody @Valid LivroRequest livroRequest){
+    public ResponseEntity<?> cadastraLivro(@RequestBody @Valid LivroRequest livroRequest){
         Livro livro = livroRequest.toModel(entityManager);
-        return livroRepository.save(livro);
+        return ResponseEntity.ok().body(livroRepository.save(livro));
     }
 }
