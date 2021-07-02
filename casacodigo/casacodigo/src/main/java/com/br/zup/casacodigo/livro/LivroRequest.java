@@ -8,10 +8,12 @@ import com.br.zup.casacodigo.validation.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class LivroRequest {
     @NotBlank
@@ -67,8 +69,11 @@ public class LivroRequest {
         this.categoria = categoria;
         this.autor = autor;
     }
-    public Livro toModel(){
-        return new Livro(titulo,sumario,resumo,preco,numeroPaginas,isbn,dataLancamento,new Categoria(categoria),new Autor(autor) );
+    public Livro toModel(EntityManager entityManager){
+     Autor a =   entityManager.find(Autor.class, autor);
+       Categoria c = entityManager.find(Categoria.class, categoria);
+
+        return new Livro(titulo,sumario,resumo,preco,numeroPaginas,isbn,dataLancamento, c, a );
     }
 
     public void setDataLancamento(LocalDate dataLancamento) {
