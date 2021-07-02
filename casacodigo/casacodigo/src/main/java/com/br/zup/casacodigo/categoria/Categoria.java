@@ -30,9 +30,8 @@ public class Categoria {
         return nome;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Categoria(Long id){this.id = id;}
+
 
     public void setId(Long id) {
         this.id = id;
