@@ -1,6 +1,7 @@
 package com.br.zup.casacodigo.pais;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,10 @@ public class ControllerPais {
     PaisRepository paisRepository;
 
     @PostMapping
-    public Pais salvarPais(@RequestBody @Valid Pais pais){
-        return paisRepository.save(pais);
+    public ResponseEntity<Pais> salvarPais(@RequestBody @Valid PaisRequest paisRequest){
+        Pais pais = paisRequest.toModelo();
+        paisRepository.save(pais);
+        return ResponseEntity.ok().body(pais);
 
     }
 }
