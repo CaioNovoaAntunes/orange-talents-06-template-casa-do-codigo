@@ -3,6 +3,7 @@ package com.br.zup.casacodigo.cliente;
 
 import com.br.zup.casacodigo.pais.Pais;
 import com.br.zup.casacodigo.pais.estado.Estado;
+import com.br.zup.casacodigo.validation.CPF_CNPJ;
 
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ public class Cliente {
     @Column(nullable=false)
     private String sobrenome;
 
-
+    @CPF_CNPJ
     @Column(unique = true)
     private String documento;
 

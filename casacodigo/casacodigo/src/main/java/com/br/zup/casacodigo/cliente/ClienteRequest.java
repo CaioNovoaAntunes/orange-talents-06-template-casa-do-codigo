@@ -4,6 +4,7 @@ import com.br.zup.casacodigo.pais.Pais;
 import com.br.zup.casacodigo.pais.PaisRepository;
 import com.br.zup.casacodigo.pais.estado.Estado;
 import com.br.zup.casacodigo.pais.estado.EstadoRepository;
+import com.br.zup.casacodigo.validation.CPF_CNPJ;
 import com.br.zup.casacodigo.validation.CheckIfExist;
 import com.br.zup.casacodigo.validation.UniqueValue;
 
@@ -22,6 +23,7 @@ public class ClienteRequest {
     private String nome;
     @NotBlank
     private String sobrenome;
+    @CPF_CNPJ
     @NotBlank
     @UniqueValue(instanceClass = Cliente.class, field = "documento")
     private String documento;

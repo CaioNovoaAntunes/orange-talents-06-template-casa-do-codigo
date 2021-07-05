@@ -23,7 +23,7 @@ public class EstadosRequestDto {
 
 
 
-   
+
 
     public EstadosRequestDto(@NotBlank String nome, @NotNull Long pais) {
         this.nome = nome;
