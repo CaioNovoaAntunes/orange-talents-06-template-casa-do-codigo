@@ -19,6 +19,8 @@ public class EstadoController {
     @Autowired
     PaisRepository paisRepository;
 
+
+
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid EstadosRequestDto dto ) {
         Estado estado = dto.toModel(paisRepository);
